@@ -1,0 +1,30 @@
+.navigation {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  
+    .logo-container {
+      height: 100%;
+      width: 70px;
+      padding: 10px;
+    }
+  
+    .nav-links-container {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  
+      .nav-link {
+        padding: 0px 11px;
+        cursor: pointer;
+        font-size: 22px;
+        font-weight: 500;
+        transform: scale(.8, 1.19);
+      }
+    }
+  }
+  
