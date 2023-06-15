@@ -2,7 +2,12 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+    getAuth, 
+    signInWithPopup, 
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword 
+} from 'firebase/auth';
 import {
     getFirestore,
     doc,//get a document insntance 
@@ -21,13 +26,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
     prompt: 'select_account',
 });
-
-export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const auth = getAuth(); // keep track of authentication state of whole application 
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const db = getFirestore(); // points to our database
 export const createUserDocumentFromAuth = async (user) => {
     console.log(user);
@@ -44,8 +48,12 @@ export const createUserDocumentFromAuth = async (user) => {
             })
         }
         catch (error) {
-            console.log("error in setDoc ",error);
+            console.log("error in setDoc ", error);
         }
     }
     return userDocRef;
+} 
+export const createAuthUserWithEmailAndPassword = async ()=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane 
+
+
 } 
