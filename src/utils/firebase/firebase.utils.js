@@ -6,7 +6,8 @@ import {
     getAuth, 
     signInWithPopup, 
     GoogleAuthProvider,
-    createUserWithEmailAndPassword 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
 } from 'firebase/auth';
 import {
     getFirestore,
@@ -33,7 +34,7 @@ googleProvider.setCustomParameters({
 export const auth = getAuth(); // keep track of authentication state of whole application 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const db = getFirestore(); // points to our database
-export const createUserDocumentFromAuth = async (user) => {
+export const createUserDocumentFromAuth = async (user,additionalInfo) => {
     console.log(user);
     const userDocRef = doc(db, 'users', user.uid); // instance of particular user but we dont know it exists or not 
     const userSnapShot = await getDoc(userDocRef); // actual object to check wheather the user exits in DB or not 
@@ -44,7 +45,8 @@ export const createUserDocumentFromAuth = async (user) => {
             await setDoc(userDocRef, {
                 displayName,
                 email,
-                createdAt
+                createdAt,
+                ...additionalInfo
             })
         }
         catch (error) {
@@ -53,7 +55,15 @@ export const createUserDocumentFromAuth = async (user) => {
     }
     return userDocRef;
 } 
-export const createAuthUserWithEmailAndPassword = async ()=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane 
-
-
+export const createAuthUserWithEmailAndPassword = async (email,password)=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane 
+    if(!email ||!password){
+        return "enter valid credentials";
+    }
+    return await createUserWithEmailAndPassword(auth,email,password);
+} 
+export const signInAuthUserWithEmailAndPassword = async (email,password)=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane 
+    if(!email ||!password){
+        return "enter valid credentials";
+    }
+    return await signInWithEmailAndPassword(auth,email,password);
 } 
