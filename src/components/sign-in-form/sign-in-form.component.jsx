@@ -1,7 +1,7 @@
 import Button from '../button/button.component'
 import FormInput from '../from-input/form-input.component'
 import './sign-in-form.styles.scss'
-import { useState } from 'react'
+import { useState} from 'react'
 import {signInWithGooglePopup ,createUserDocumentFromAuth,signInAuthUserWithEmailAndPassword} from '../../utils/firebase/firebase.utils';
 const defaultFormFields = {
     email: '',
@@ -16,8 +16,9 @@ const SignInForm = () => {
      }
     const signInWithGoogle = async () =>{
         try{
-            const {user} = await signInWithGooglePopup();
-            await createUserDocumentFromAuth(user);
+            await signInWithGooglePopup();
+            // const {user} = await signInWithGooglePopup(); 
+            // await createUserDocumentFromAuth(user);  as we are centerlizing with onChangeAuth we Should shift this to contexts
         }
         catch(error){
             if(error.code === "auth/popup-closed-by-user"){
@@ -28,9 +29,10 @@ const SignInForm = () => {
     }
     const onSubmitHandler = async (event)=>{
         event.preventDefault();
+        
         try{
-            const response = await signInAuthUserWithEmailAndPassword(email,password);
-            console.log(response);
+            const {user} = await signInAuthUserWithEmailAndPassword(email,password);
+            setFormFields(defaultFormFields);
         }
         catch(error){
 

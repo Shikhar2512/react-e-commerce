@@ -7,7 +7,9 @@ import {
     signInWithPopup, 
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
 } from 'firebase/auth';
 import {
     getFirestore,
@@ -35,7 +37,6 @@ export const auth = getAuth(); // keep track of authentication state of whole ap
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const db = getFirestore(); // points to our database
 export const createUserDocumentFromAuth = async (user,additionalInfo) => {
-    console.log(user);
     const userDocRef = doc(db, 'users', user.uid); // instance of particular user but we dont know it exists or not 
     const userSnapShot = await getDoc(userDocRef); // actual object to check wheather the user exits in DB or not 
     if (!userSnapShot.exists()) { // id user data doesnot exist create and set doc
@@ -61,9 +62,13 @@ export const createAuthUserWithEmailAndPassword = async (email,password)=>{ // m
     }
     return await createUserWithEmailAndPassword(auth,email,password);
 } 
-export const signInAuthUserWithEmailAndPassword = async (email,password)=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane 
+export const signInAuthUserWithEmailAndPassword = async (email,password)=>{ 
     if(!email ||!password){
         return "enter valid credentials";
     }
     return await signInWithEmailAndPassword(auth,email,password);
 } 
+export const signOutUser = async () => signOut(auth);
+export const authStateChangeListner = (callback) =>{
+   return onAuthStateChanged(auth,callback);
+}

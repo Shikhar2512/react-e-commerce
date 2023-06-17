@@ -2,7 +2,6 @@ import { signInAnonymously } from "firebase/auth";
 import { useState } from "react";
 import { createAuthUserWithEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import FormInput from "../from-input/form-input.component";
-import { Form } from "react-router-dom";
 import './sign-up-form.styles.scss';
 import Button from "../button/button.component";
 const defaultFormFields = {
@@ -33,7 +32,6 @@ const SignUpForm = () => {
                 const {user} = await createAuthUserWithEmailAndPassword(email,password);
                 await createUserDocumentFromAuth(user,{displayName});
                 resetFields();
-
             }
             catch(error){
                 if(error.code === "auth/email-already-in-use"){
