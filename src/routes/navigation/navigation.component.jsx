@@ -28,7 +28,6 @@ const Navigation = () => {
                         SIGN IN
                     </Link>
                     )}
-                    
                 </div>
                 {showCartDropdown&&<CartDropdown/>}
                 

@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { queries } from "@testing-library/react";
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -15,7 +16,11 @@ import {
     getFirestore,
     doc,//get a document insntance 
     getDoc,//get data from document 
-    setDoc //set data in document
+    setDoc, //set data in document
+    collection, //to get collection reference
+    writeBatch,
+    query,
+    getDocs
 } from 'firebase/firestore'
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -36,6 +41,16 @@ googleProvider.setCustomParameters({
 export const auth = getAuth(); // keep track of authentication state of whole application 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const db = getFirestore(); // points to our database
+
+export const addCollectionAndDocument = async (collectionKey,objectsToAdd) =>{
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db); // add set events to objects passed for sucessfull transition
+    objectsToAdd.forEach(object => {
+        const docRef = doc(collectionRef,object.title.toLowerCase());
+        batch.set(docRef,object);
+    });
+    await batch.commit();
+}
 export const createUserDocumentFromAuth = async (user,additionalInfo) => {
     const userDocRef = doc(db, 'users', user.uid); // instance of particular user but we dont know it exists or not 
     const userSnapShot = await getDoc(userDocRef); // actual object to check wheather the user exits in DB or not 
@@ -69,6 +84,19 @@ export const signInAuthUserWithEmailAndPassword = async (email,password)=>{
     return await signInWithEmailAndPassword(auth,email,password);
 } 
 export const signOutUser = async () => signOut(auth);
+
 export const authStateChangeListner = (callback) =>{
    return onAuthStateChanged(auth,callback);
 }
+
+export const getCategoriesAndDocuments = async ()=>{
+    const collectionRef = collection(db,'categories');
+    const q = query(collectionRef);
+    const querySnapshot = await getDocs(q); //fetch doc
+    const categoryMap = querySnapshot.docs.reduce((auth,docSnapshot)=>{
+        const {title, items} = docSnapshot.data();
+        auth[title.toLowerCase()] = items;
+        return auth;
+    },{})
+    return categoryMap;
+} 

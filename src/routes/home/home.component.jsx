@@ -1,9 +1,9 @@
-import Categories from "../../components/category-list/category-list.component";
+import Directory from "../../components/directory/directory.component";
 
 
 const Home = ({ className }) => {
     return (
-        <Categories className='categories-container' />
+        <Directory className='categories-container' />
     );
 }
 
