@@ -2,8 +2,8 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { categoriesContext } from "../../components/contexts/categories.context";
 import ProductCard from "../../components/product-card/product-card.component";
-import './category.styles.scss';
 import Loading from "../../components/loading/loading.component";
+import { CategoryContainer, CategoryTitle } from "./category.styles";
 const Category = () => {
     const { category } = useParams();
     const { categoriesMap } = useContext(categoriesContext);
@@ -15,8 +15,8 @@ const Category = () => {
     if (products) {
         return (
             <Fragment>
-                <h2 className="category-title">{category.toUpperCase()}</h2>
-                <div className="category-container">
+                <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+                <CategoryContainer>
                     {
                         products.map((product) => {
                             return (
@@ -24,7 +24,7 @@ const Category = () => {
                             )
                         })
                     }
-                </div>
+                </CategoryContainer>
             </Fragment>
 
         )

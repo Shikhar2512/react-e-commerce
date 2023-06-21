@@ -1,4 +1,5 @@
-.product-card-container {
+import styled from "styled-components";
+export const ProductCardContainer = styled.div`
   border-radius: 3px;
   width: 100%;
   display: flex;
@@ -40,23 +41,22 @@
       display: flex;
     }
   }
-
-  .footer {
+`
+export const Footer = styled.div`
     width: 100%;
     height: 5%;
     display: flex;
     justify-content: space-between;
     font-size: 18px;
-
-    .name {
+`
+export const ProductName = styled.span`
       height: 5%;
       width: 90%;
       margin-bottom: 15px;
-    }
-
-    .price {
+`
+export const ProductPrice = styled.span`
       height: 5%;
       width: 10%;
-    }
-  }
-}
+`
+
+

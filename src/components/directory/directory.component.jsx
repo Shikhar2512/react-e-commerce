@@ -1,5 +1,6 @@
-import './directory.styles.scss'
+
 import DirectoryItem from '../directory-item/directory-item.component'
+import { Categories } from './directory.styles.jsx'
 const Directory = ({className}) => {
     const categories = [
         {
@@ -29,7 +30,7 @@ const Directory = ({className}) => {
         }
       ]
     return (
-        <div className={className}>
+        <Categories>
             {
                 categories.map((category) => {
                     return (
@@ -37,7 +38,7 @@ const Directory = ({className}) => {
                     )
                 })
             }
-        </div>
+        </Categories>
     )
 }
 export default Directory

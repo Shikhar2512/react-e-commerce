@@ -1,38 +1,37 @@
-import './checkout.styles.scss';
+import './checkout.styles.jsx';
 import { cartContext } from '../../components/contexts/cart.context';
 import { useContext } from 'react';
 import CheckoutItem from '../../components/checkout-item/checkout-item';
+import { CheckoutContainer, CheckoutHeader, HeaderBlock, Total } from './checkout.styles.jsx';
 const Checkout = () => {
     const { cartItems} = useContext(cartContext);
     const total = cartItems.reduce((acc,cartItem)=> acc+cartItem.price*cartItem.quantity,0);
     return (
-        <div className='checkout-container'>
-            <div className='checkout-header'>
-                <div className='header-block'>
+        <CheckoutContainer>
+            <CheckoutHeader>
+                <HeaderBlock>
                     <span>Product</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Description</span>
-                </div>
-                <div className='header-block'>
-               
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Quantity</span>
-                    
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Price</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Remove</span>
-                </div>
-            </div>
+                </HeaderBlock>
+            </CheckoutHeader>
             {
                 cartItems.map((cartItem)=>{
                     return(<CheckoutItem key ={cartItem.id} cartItem={cartItem}/>)
                 })
             }
-            <span className='total'>Total : &#36;{total}</span>
-        </div>
+            <Total>Total : &#36;{total}</Total>
+        </CheckoutContainer>
     )
 }
 export default Checkout;
