@@ -21,13 +21,14 @@ const Navigation = () => {
                         SHOP
                     </NavLink>
                     {(currentUser?<><NavLink as='span' onClick={signOutUser}>SIGN OUT</NavLink>
-                    <CartIcon />
+                    
                     </>
                     :
                     <NavLink to='/auth'>
                         SIGN IN
                     </NavLink>
                     )}
+                    <CartIcon />
                 </NavLinks>
                 {showCartDropdown&&<CartDropdown/>}
                 

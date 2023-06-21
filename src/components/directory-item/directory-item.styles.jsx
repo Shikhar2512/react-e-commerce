@@ -9,7 +9,8 @@ export const Body = styled.div`
         align-items: center;
         justify-content: center;
         background-color: white;
-        opacity: 0.6;
+        ${'' /* opacity: 0.6; */}
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .6), 0 6px 20px 0 rgba(0, 0, 0, .6);
         position: absolute;
 
         h2 {
@@ -24,15 +25,13 @@ export const Body = styled.div`
             font-weight: lighter;
             font-size: 16px;
         }
-    
 `
 export const BackgroundImage = styled.div`
         width: 100%;
         height: 100%;
         background-size: cover;
         background-position: center;
-        opacity: .8;
-                                 
+        opacity: .8;             
         &:hover{
             opacity: 1;
         }
@@ -61,9 +60,9 @@ export const DirectoryItemContainer = styled.div`
     border: 1px solid black;
     margin: 0 7.5px 15px;
     overflow: hidden;
-
+        position:relative;
     &:hover {
-    
+        top:-5px;
         cursor: pointer;
     & ${Body}{
             display: none;
@@ -72,10 +71,10 @@ export const DirectoryItemContainer = styled.div`
             transform: scale(1.1);
             transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
         }
-        transform: scale(1.02);
+        transform: scale(1.01);
       
         
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.7), 0 6px 20px 0 rgba(0, 0, 0, 0);
         transition: transform 0.6s;
         
     }
