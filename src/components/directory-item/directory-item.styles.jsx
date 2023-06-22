@@ -36,7 +36,6 @@ export const BackgroundImage = styled.div`
             opacity: 1;
         }
         background-image:${({imageUrl}) => {
-            console.log(imageUrl);
             return (
                 `url(${imageUrl})`
             )

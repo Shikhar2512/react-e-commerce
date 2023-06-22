@@ -7,7 +7,6 @@ const BUTTON_TYPE_CLASS = {
 }
 const Button = ({ children, buttonType, ...otherProps }) => {
     const ButtonTypeHolder = BUTTON_TYPE_CLASS[buttonType];
-    console.log(ButtonTypeHolder);
     return (
         <ButtonTypeHolder {...otherProps}>
             {children}

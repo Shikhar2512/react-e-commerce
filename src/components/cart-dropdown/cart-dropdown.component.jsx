@@ -11,7 +11,6 @@ const CartDropdown = () => {
         setShowCartDropdown(false);
         navigate('/checkout');
     }
-    console.log(cartItems);
     return (
         <CartDropdownContainer>
             <CartItems>

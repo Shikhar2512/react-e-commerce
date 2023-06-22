@@ -17,7 +17,6 @@ const SignUpForm = () => {
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
-        console.log(formFields);
     }
     const resetFields = () =>{
         setFormFields(defaultFormFields);
