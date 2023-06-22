@@ -17,7 +17,7 @@ export const Label = styled.label`
         pointer-events: none;
         left: 5px;
         top: 10px;
-        transition: 300ms ease-out;
+        transition: 200ms ease-out;
         ${({ shrink }) => shrink && shrinkLabelStyles}
 `
 
@@ -33,13 +33,17 @@ export const Input = styled.input`
         border-radius: 0;
         border-bottom: 1px groove ${subColor};
         margin: 25px 0;
-
+        &:hover{
+            border-bottom: 1px solid ${mainColor}
+        }
         &:focus {
             outline: none;
+            border-bottom: 1px solid ${mainColor}
         }
 
         &:focus~ ${Label} {
             ${shrinkLabelStyles}
+            font-weight:700;
         }
 `
 

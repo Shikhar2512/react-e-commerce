@@ -1,24 +1,28 @@
-import { useContext } from 'react';
-import { categoriesContext } from '../../components/contexts/categories.context';
+import Loading from '../../components/loading/loading.component';
 import { Fragment } from 'react';
 import CategoryPreview from '../../components/category-preview/category-preview.component';
-import Loading from '../../components/loading/loading.component';
-const CategoriesPreview = () => {
-    const { categoriesMap } = useContext(categoriesContext);
-   
-    return (
-        <Fragment>
-            {
-                Object.keys(categoriesMap).map((title) => {
-                    const products = categoriesMap[title];
-                    return(
-                        <CategoryPreview key = {title} title={title} products={products}/>
-                    )
-                })
-            }
+const CategoriesPreview = ({categoriesMap}) => {
+    if(categoriesMap){
+        return (
+            <Fragment>
+                {
+                    Object.keys(categoriesMap).map((title) => {
+                        const products = categoriesMap[title];
+                        return(
+                            <CategoryPreview key = {title} title={title} products={products}/>
+                        )
+                    })
+                }
+    
+            </Fragment>
+    
+        )
+    }
+    else{
+        return(
+            <Loading/>
+        )
+    }
 
-        </Fragment>
-
-    )
 }
 export default CategoriesPreview
