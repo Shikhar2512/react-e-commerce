@@ -23,7 +23,6 @@ export const ProductCardContainer = styled.div`
     position: absolute;
     top: 255px;
     display: none;
-    transition: box-shadow 1s;
   }
 
   &:hover {

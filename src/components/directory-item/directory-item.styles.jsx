@@ -12,7 +12,6 @@ export const Body = styled.div`
         ${'' /* opacity: 0.6; */}
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .6), 0 6px 20px 0 rgba(0, 0, 0, .6);
         position: absolute;
-
         h2 {
             font-weight: bold;
             margin: 0 6px 0;
