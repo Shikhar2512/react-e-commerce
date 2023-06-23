@@ -7,7 +7,7 @@ const middleware = [logger]    //lib helpers run before an action hits the reduc
 const persistConfig = {
     key:'root',
     storage,
-    whitelist:['cart']
+    blacklist:['user']
 }
 const persistedReducer = persistReducer(persistConfig,rootReducer);
 const composedEnhancers = compose(applyMiddleware(...middleware));//apply these middlewares 
