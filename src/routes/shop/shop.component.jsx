@@ -2,26 +2,22 @@ import { Route,Routes } from "react-router-dom";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
 import { useEffect } from "react";
 import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
-import { selectCategoriesMap } from "../../store/categories/categories.selector";
+import { selectCategoriesIsLoading, selectCategoriesMap } from "../../store/categories/categories.selector";
 import Category from "../category/category.component";
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-import { setCategories } from "../../store/categories/categories.action";
+import { fetchCategoriesAsync } from "../../store/categories/categories.action";
 import { useDispatch } from "react-redux";
 
 const Shop = () => {
     const dispatch = useDispatch()
     const categoriesMap = useSelector(selectCategoriesMap);
+    const isLoading = useSelector(selectCategoriesIsLoading);
     useEffect(()=>{
-        const getCategory = async ()=>{
-            const categoriesArray = await getCategoriesAndDocuments();
-            dispatch(setCategories(categoriesArray));
-        }
-        getCategory();
+        dispatch(fetchCategoriesAsync());
     },[]);
      return (
         <Routes>
-            <Route index element = {<CategoriesPreview categoriesMap ={categoriesMap}/>}></Route>
-            <Route path=":category" element = {<Category categoriesMap = {categoriesMap}/>}></Route>
+            <Route index element = {<CategoriesPreview categoriesMap ={categoriesMap} isLoading = {isLoading}/>}></Route>
+            <Route path=":category" element = {<Category categoriesMap = {categoriesMap} isLoading={isLoading}/>}></Route>
         </Routes>
      )
 }

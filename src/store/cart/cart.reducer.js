@@ -26,12 +26,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
                 cartQuantity: payload
             }
         default:
-            return (
-                {
-                    ...state
-                }
-            )
-
+            return state
 
     }
 }

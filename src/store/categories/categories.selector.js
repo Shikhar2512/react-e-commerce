@@ -17,4 +17,4 @@ export const selectCategoriesMap =
         return auth;
     }, {})
     )
-   
+export const selectCategoriesIsLoading = (state)=>state.categories.isLoading 

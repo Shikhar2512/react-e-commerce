@@ -1,8 +1,8 @@
 import Loading from '../../components/loading/loading.component';
 import { Fragment } from 'react';
 import CategoryPreview from '../../components/category-preview/category-preview.component';
-const CategoriesPreview = ({categoriesMap}) => {
-    if(categoriesMap){
+const CategoriesPreview = ({categoriesMap,isLoading}) => {
+    if(!isLoading){
         return (
             <Fragment>
                 {
