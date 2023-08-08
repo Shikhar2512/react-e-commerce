@@ -6,6 +6,7 @@ import { CategoryContainer, CategoryTitle } from "./category.styles";
 const Category = ({categoriesMap,isLoading}) => {
     const { category } = useParams();
     const [products, setProducts] = useState(categoriesMap[category]);
+    console.log(products);
     useEffect(() => {
         setProducts(categoriesMap[category]);
     }, [category, categoriesMap])
@@ -15,11 +16,11 @@ const Category = ({categoriesMap,isLoading}) => {
                 <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
                 <CategoryContainer>
                     {
-                        products.map((product) => {
+                        products?products.map((product) => {
                             return (
                                 <ProductCard key={product.id} product={product} />
                             )
-                        })
+                        }):<Loading/>
                     }
                 </CategoryContainer>
             </Fragment>
