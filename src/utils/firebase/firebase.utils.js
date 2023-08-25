@@ -69,9 +69,10 @@ export const createUserDocumentFromAuth = async (user,additionalInfo) => {
             console.log("error in setDoc ", error);
         }
     }
+    console.log(userDocRef);
     return userDocRef;
 } 
-export const createAuthUserWithEmailAndPassword = async (email,password)=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane 
+export const createAuthUserWithEmailAndPassword = async (email,password)=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane its a session 
     if(!email ||!password){
         return "enter valid credentials";
     }

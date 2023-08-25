@@ -1,19 +1,27 @@
-import { all,call,put,takeLatest } from "redux-saga/effects";
+import { all,put,takeLatest,call, take } from "redux-saga/effects";
 import { USER_ACTION_TYPES } from "./user.types";
-import { authStateChangeListner,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
-function* onAuthStateChange(){
-    yield takeLatest(USER_ACTION_TYPES.SET_CURRENT_USER,)
+import {signInSuccess,signInFailed } from "./user.action";
+import { getCurrentUser } from "../../utils/firebase/firebase.utils";
+import { createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
+
+function* getUserSnapshot(user){
+    
 }
 
-function* setCurrentUserAsync(){
-    const unsubcribe = authStateChangeListner((user) => { //this is tied with the currentUser when ever changed it will trigger 
-        if (user) {
-          createUserDocumentFromAuth(user);
-        }
-        dispatch(setCurrentUser(user));
-      })
-      return unsubcribe;
+function* isUserAuthenticated(){
+    try{
+        const userAuth = call(getCurrentUser);
+        if(!userAuth) return;
+        
+    }catch(error){
+
+    }
 }
+
+function* onCheckUserSession(){
+    yield takeLatest(USER_ACTION_TYPES.CHECK_CURRENT_USER,call(isUserAuthenticated))
+}
+
 export function* userSaga(){
     yield all([])
-}
+} 
