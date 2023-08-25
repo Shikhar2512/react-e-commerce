@@ -17,8 +17,6 @@ const SignInForm = () => {
     const signInWithGoogle = async () =>{
         try{
             await signInWithGooglePopup();
-            // const {user} = await signInWithGooglePopup(); 
-            // await createUserDocumentFromAuth(user);  as we are centerlizing with onChangeAuth we Should shift this to contexts
         }
         catch(error){
             if(error.code === "auth/popup-closed-by-user"){

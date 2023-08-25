@@ -8,7 +8,6 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 import { LogoContainer, NavLinks, NavigationContainer,NavLink } from './navigation.styles';
 import { selectShowCartDropddown } from '../../store/cart/cart.selector';
 const Navigation = () => {
-    console.log(1);
     const currentUser = useSelector(selectCurrentUser); // getting data from redux store ...... 
     const showCartDropdown = useSelector(selectShowCartDropddown)
     return (

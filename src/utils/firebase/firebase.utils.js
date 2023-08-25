@@ -89,6 +89,19 @@ export const authStateChangeListner = (callback) =>{
    return onAuthStateChanged(auth,callback);
 }
 
+export const getCurrentUser = ()=>{
+    return new Promise((resolve,reject)=>{
+        const unsubcribe = onAuthStateChanged(
+            auth,
+            (userAuth)=>{
+                unsubcribe();
+                resolve(userAuth);
+            },
+            reject
+        )
+    })
+} 
+
 export const getCategoriesAndDocuments = async ()=>{
     const collectionRef = collection(db,'categories');
     const q = query(collectionRef);

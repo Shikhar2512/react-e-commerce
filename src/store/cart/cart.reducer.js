@@ -8,7 +8,6 @@ const INITIAL_STATE = {
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
     const { type, payload } = action;
-    console.log(action , payload);
     switch (type) {
         case CART_ACTION_TYPES.SET_SHOW_CART_DROPDOWN:
             return {
