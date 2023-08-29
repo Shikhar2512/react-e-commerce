@@ -38,6 +38,7 @@ const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
     prompt: 'select_account',
 });
+
 export const auth = getAuth(); // keep track of authentication state of whole application 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const db = getFirestore(); // points to our database
@@ -51,6 +52,7 @@ export const addCollectionAndDocument = async (collectionKey,objectsToAdd) =>{
     });
     await batch.commit();
 }
+
 export const createUserDocumentFromAuth = async (user,additionalInfo) => {
     const userDocRef = doc(db, 'users', user.uid); // instance of particular user but we dont know it exists or not 
     const userSnapShot = await getDoc(userDocRef); // actual object to check wheather the user exits in DB or not 
@@ -69,21 +71,23 @@ export const createUserDocumentFromAuth = async (user,additionalInfo) => {
             console.log("error in setDoc ", error);
         }
     }
-    console.log(userDocRef);
-    return userDocRef;
+    return userSnapShot;
 } 
+
 export const createAuthUserWithEmailAndPassword = async (email,password)=>{ // making an authenticated user inside firebase authentication tab. this is not user document inside firestore instane its a session 
     if(!email ||!password){
         return "enter valid credentials";
     }
     return await createUserWithEmailAndPassword(auth,email,password);
 } 
+
 export const signInAuthUserWithEmailAndPassword = async (email,password)=>{ 
     if(!email ||!password){
         return "enter valid credentials";
     }
     return await signInWithEmailAndPassword(auth,email,password);
 } 
+
 export const signOutUser = async () => signOut(auth);
 
 export const authStateChangeListner = (callback) =>{

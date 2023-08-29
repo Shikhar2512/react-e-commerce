@@ -1,17 +1,17 @@
 import Home from "./routes/home/home.component";
 import {useEffect } from "react";
-import { authStateChangeListner, createUserDocumentFromAuth, getCurrentUser } from './utils/firebase/firebase.utils';
+import { getCurrentUser } from './utils/firebase/firebase.utils';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "./store/user/user.action";
 import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
+import { checkCurrentUser } from "./store/user/user.action";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    getCurrentUser().then((userAuth)=> console.log(userAuth));
+    dispatch(checkCurrentUser());
   }, []) 
   return (
     <Routes>

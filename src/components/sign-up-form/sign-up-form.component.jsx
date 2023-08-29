@@ -4,6 +4,8 @@ import { createAuthUserWithEmailAndPassword,createUserDocumentFromAuth } from ".
 import FormInput from "../from-input/form-input.component";
 import Button from "../button/button.component";
 import { SignUpContainer } from "./sign-up-form.styles";
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../../store/user/user.action";
 const defaultFormFields = {
     displayName: '',
     email: '',
@@ -14,6 +16,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+    const dispatch = useDispatch();
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
@@ -27,16 +30,17 @@ const SignUpForm = () => {
             if(password !== confirmPassword){
                 console.log("password didn't match")
             }
-            try{
-                const {user} = await createAuthUserWithEmailAndPassword(email,password);
-                await createUserDocumentFromAuth(user,{displayName});
-                resetFields();
-            }
-            catch(error){
-                if(error.code === "auth/email-already-in-use"){
-                    console.log("user already exist");
-                }
-            }
+            dispatch(signUpStart(email,password,displayName));
+            // try{
+            //     const {user} = await createAuthUserWithEmailAndPassword(email,password);
+            //     await createUserDocumentFromAuth(user,{displayName});
+            resetFields();
+            // }
+            // catch(error){
+            //     if(error.code === "auth/email-already-in-use"){
+            //         console.log("user already exist");
+            //     }
+            // }
         }
     } 
     return (

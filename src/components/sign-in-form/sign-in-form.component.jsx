@@ -1,8 +1,10 @@
 import Button from '../button/button.component'
 import FormInput from '../from-input/form-input.component'
-import { SignInContainer,ButtonContainer } from './sign-in-form.styles';
-import { useState} from 'react'
-import {signInWithGooglePopup ,createUserDocumentFromAuth,signInAuthUserWithEmailAndPassword} from '../../utils/firebase/firebase.utils';
+import { SignInContainer, ButtonContainer } from './sign-in-form.styles';
+import { useState } from 'react'
+import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 const defaultFormFields = {
     email: '',
     password: ''
@@ -10,31 +12,18 @@ const defaultFormFields = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
-    const onChangeHandler = (event) => { 
-        const{name,value} = event.target;
-        setFormFields({...formFields,[name]:value})
-     }
-    const signInWithGoogle = async () =>{
-        try{
-            await signInWithGooglePopup();
-        }
-        catch(error){
-            if(error.code === "auth/popup-closed-by-user"){
-                console.log(error,"auth/popup-closed-by-user"," in signInWithGoogle")
-            }
-        }
-
+    const dispatch = useDispatch();
+    const onChangeHandler = (event) => {
+        const { name, value } = event.target;
+        setFormFields({ ...formFields, [name]: value })
     }
-    const onSubmitHandler = async (event)=>{
+    const signInWithGoogle = async () => {
+        const x = dispatch(googleSignInStart());
+    }
+    const onSubmitHandler = (event) => {
         event.preventDefault();
-        
-        try{
-            const {user} = await signInAuthUserWithEmailAndPassword(email,password);
-            setFormFields(defaultFormFields);
-        }
-        catch(error){
-
-        }
+        dispatch(emailSignInStart(email, password));
+        setFormFields(defaultFormFields);
     }
     return (
         <SignInContainer>
@@ -45,7 +34,7 @@ const SignInForm = () => {
                 <FormInput label='Password' type='password' name='password' value={password} onChange={onChangeHandler} required />
                 <ButtonContainer>
                     <Button type='submit' buttonType='base'>Sign In</Button>
-                    <Button type = 'button' buttonType='google' onClick = {signInWithGoogle}>Sign in with google</Button>
+                    <Button type='button' buttonType='google' onClick={signInWithGoogle}>Sign in with google</Button>
                 </ButtonContainer>
 
             </form>
