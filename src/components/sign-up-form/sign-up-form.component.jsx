@@ -1,6 +1,4 @@
-import { signInAnonymously } from "firebase/auth";
 import { useState } from "react";
-import { createAuthUserWithEmailAndPassword,createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import FormInput from "../from-input/form-input.component";
 import Button from "../button/button.component";
 import { SignUpContainer } from "./sign-up-form.styles";

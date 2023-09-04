@@ -5,6 +5,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import { Provider } from 'react-redux';
 import { store, persister } from './store/store';
+import { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './utils/stripe/stripe.utils';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Loading from './components/loading/loading.component';
@@ -13,9 +15,11 @@ root.render(
   <React.StrictMode>
 
     <Provider store={store}>
-      <PersistGate persistor={persister} loading ={<Loading/>}>
+      <PersistGate persistor={persister} loading={<Loading />}>
         <BrowserRouter>
-          <App />
+          <Elements stripe = {stripePromise}>{/*   we have to pass something to it so that it can know it is register to us */}
+            <App />
+          </Elements>
         </BrowserRouter>
       </PersistGate>
     </Provider>
