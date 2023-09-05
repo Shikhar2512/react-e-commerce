@@ -9,13 +9,13 @@ import { Elements } from '@stripe/react-stripe-js';
 import { stripePromise } from './utils/stripe/stripe.utils';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import Loading from './components/loading/loading.component';
+import Spinner from './components/loading/spinner.component';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 
     <Provider store={store}>
-      <PersistGate persistor={persister} loading={<Loading />}>
+      <PersistGate persistor={persister} loading={<Spinner />}>
         <BrowserRouter>
           <Elements stripe = {stripePromise}>{/*   we have to pass something to it so that it can know it is register to us */}
             <App />

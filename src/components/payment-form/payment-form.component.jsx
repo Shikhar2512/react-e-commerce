@@ -1,36 +1,64 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import Button from "../button/button.component";
-import { PaymentFormContainer, FormContainer } from "./payment-form.styles";
+import { CardElement,useElements, useStripe } from "@stripe/react-stripe-js";
+import { PaymentFormContainer, FormContainer, paymentSpinner, PaymentButton, Heading} from "./payment-form.styles";
+import { useSelector } from "react-redux";
+import { selectCartTotal } from "../../store/cart/cart.selector";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { useState } from "react";
+import {  } from "./payment-form.styles";
 const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
+    const amount = useSelector(selectCartTotal);
+    const currentUser = useSelector(selectCurrentUser);
+    const [isProcessingPayment,setIsProcessingPayment] = useState(false);
     const paymentHandler = async (event) => {
         event.preventDefault();
         if (!stripe || !elements) {
             return;
         }
+        
         try {
+            setIsProcessingPayment(true);
             const response = await fetch('.netlify/functions/create-payment-intent', {
                 method: 'post',
                 headers: {
                     'content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    amount: 10000
+                    amount: amount  
                 })
             }).then(res=>res.json())
             console.log(response);
+            const {paymentIntent:{client_secret}} = response;
+            const paymentResult = await stripe.confirmCardPayment(client_secret,{
+                payment_method:{
+                    card:elements.getElement(CardElement),
+                    billing_details:{
+                        name: currentUser?currentUser:'guest'
+                    }
+                }
+            })
+            setIsProcessingPayment(false);
+            if(paymentResult.error){
+                alert(paymentResult.error);
+            }
+            else{
+                if(paymentResult.paymentIntent.status === "succeeded"){
+                    alert("successfull")
+                }
+            }
         } catch (error) {
-            console.log("shikhar",error);
+            setIsProcessingPayment(false);
+            console.log("shikhar",error); 
         }
 
-    }
+    }   
     return (
         <PaymentFormContainer onSubmit={paymentHandler}>
             <FormContainer>
-                <h2>Credit Card Payment : </h2>
+                <Heading>Credit Card Payment : </Heading>
                 <CardElement />
-                <Button buttonType='inverted'>PayNow</Button>
+                <PaymentButton isLoading = {isProcessingPayment} buttonType='base'>PayNow</PaymentButton>
             </FormContainer>
         </PaymentFormContainer>
     )

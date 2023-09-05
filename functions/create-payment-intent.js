@@ -11,10 +11,10 @@ exports.handler = async (event)=>{
                 currency:"inr",
                 payment_method_types : ["card"]
             }
-        )
+        )   
         return {
             statusCode: 200,
-            body:JSON.stringify({ paymentIntent })
+            body:JSON.stringify({ paymentIntent})
         }
     }catch(error){ 
         console.log("shikhar",error);

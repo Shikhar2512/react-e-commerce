@@ -1,4 +1,4 @@
-import Loading from '../../components/loading/loading.component';
+import Spinner from '../../components/loading/spinner.component';
 import { Fragment } from 'react';
 import CategoryPreview from '../../components/category-preview/category-preview.component';
 const CategoriesPreview = ({categoriesMap,isLoading}) => {
@@ -20,7 +20,7 @@ const CategoriesPreview = ({categoriesMap,isLoading}) => {
     }
     else{
         return(
-            <Loading/>
+            <Spinner/>
         )
     }
 
