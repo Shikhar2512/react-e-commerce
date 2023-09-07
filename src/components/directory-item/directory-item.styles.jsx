@@ -34,11 +34,11 @@ export const BackgroundImage = styled.div`
         &:hover{
             opacity: 1;
         }
-        background-image:${({imageUrl}) => {
-            return (
-                `url(${imageUrl})`
-            )
-        }}
+        background-image:${({ imageUrl }) => {
+        return (
+            `url(${imageUrl})`
+        )
+    }}
                                  
         ${'' /* &:hover{            //why not working
             opacity: 1;
@@ -61,6 +61,8 @@ export const DirectoryItemContainer = styled.div`
         position:relative;
     &:hover {
         top:-5px;
+        height: 245px;
+        margin: 0 7.5px 10px;
         cursor: pointer;
     & ${Body}{
             display: none;

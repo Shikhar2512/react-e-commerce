@@ -6,7 +6,6 @@ const CheckoutItem = ({ cartItem }) => {
     const {name,imageUrl,price,quantity} = cartItem;
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems);
-    const cartQuantity = useSelector(selectCartQuantity);
     const addItemHandler = ()=> {
        dispatch(addItemToCart(cartItem,cartItems)); 
         

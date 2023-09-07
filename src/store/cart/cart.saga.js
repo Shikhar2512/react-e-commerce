@@ -14,8 +14,8 @@ import { addItemToCart, clearItemFromCart, removeItemFromCart, setIsCartOpen } f
 //     state.isCartOpen = !state.isCartOpen;
 //   } 
 function* onSetIsCartOpen(){
-    // yield put(setIsCartOpen)
-    yield takeLatest('cart/setIsCartOpen',call(setIsCartOpen))
+    yield put(setIsCartOpen);
+    // yield takeLatest('cart/setIsCartOpen',call(setIsCartOpen))
 }
 function* onClearItemFromCart(){
     yield takeLatest('cart/clearItemFromCart',call(clearItemFromCart))

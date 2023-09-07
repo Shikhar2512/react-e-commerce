@@ -1,5 +1,5 @@
 import { CardElement,useElements, useStripe } from "@stripe/react-stripe-js";
-import { PaymentFormContainer, FormContainer, paymentSpinner, PaymentButton, Heading} from "./payment-form.styles";
+import { PaymentFormContainer, FormContainer, PaymentButton, Heading} from "./payment-form.styles";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
