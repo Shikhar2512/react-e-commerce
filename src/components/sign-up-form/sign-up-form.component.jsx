@@ -3,7 +3,7 @@ import FormInput from "../from-input/form-input.component";
 import Button from "../button/button.component";
 import { SignUpContainer } from "./sign-up-form.styles";
 import { useDispatch } from "react-redux";
-import { signUpStart } from "../../store/user/user.action";
+import { signUpStart } from "../../store/user/user.reducer";
 const defaultFormFields = {
     displayName: '',
     email: '',
@@ -28,7 +28,7 @@ const SignUpForm = () => {
             if(password !== confirmPassword){
                 console.log("password didn't match")
             }
-            dispatch(signUpStart(email,password,displayName));
+            dispatch(signUpStart({email,password,displayName}));
             // try{
             //     const {user} = await createAuthUserWithEmailAndPassword(email,password);
             //     await createUserDocumentFromAuth(user,{displayName});

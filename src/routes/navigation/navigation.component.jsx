@@ -5,13 +5,13 @@ import { selectCurrentUser } from '../../store/user/user.selector';
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 import { LogoContainer, NavLinks, NavigationContainer,NavLink } from './navigation.styles';
-import { selectShowCartDropddown } from '../../store/cart/cart.selector';
+import { selectIsCartOpen} from '../../store/cart/cart.selector';
 import { useDispatch } from 'react-redux';
-import { signOutStart } from '../../store/user/user.action';
+import { signOutStart } from '../../store/user/user.reducer';
 const Navigation = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectCurrentUser); // getting data from redux store ...... 
-    const showCartDropdown = useSelector(selectShowCartDropddown)
+    const isCartOpen = useSelector(selectIsCartOpen);
     const signOutHandler = () => dispatch(signOutStart());
     return (
         <>
@@ -31,7 +31,7 @@ const Navigation = () => {
                     )}
                     <CartIcon />
                 </NavLinks>
-                {showCartDropdown && <CartDropdown/>}
+                {isCartOpen && <CartDropdown/>}
                 
                 
                 

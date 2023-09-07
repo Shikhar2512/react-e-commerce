@@ -4,9 +4,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectCategoriesIsLoading, selectCategoriesMap } from "../../store/categories/categories.selector";
 import Category from "../category/category.component";
-// import { fetchCategoriesAsync } from "../../store/categories/categories.action";
 import { useDispatch } from "react-redux";
-import { fetchCategoriesStart} from "../../store/categories/categories.action";
+import { fetchCategoriesStart} from "../../store/categories/categories.reducer";
 const Shop = () => {
     const dispatch = useDispatch()
     const categoriesMap = useSelector(selectCategoriesMap);

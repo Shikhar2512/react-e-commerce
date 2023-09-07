@@ -3,10 +3,10 @@ import FormInput from '../from-input/form-input.component'
 import { SignInContainer, ButtonContainer } from './sign-in-form.styles';
 import { useState } from 'react'
 import { useDispatch} from 'react-redux';
-import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.reducer';
 const defaultFormFields = {
     email: '',
-    password: ''
+    password: ''                                                    
 }
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
@@ -21,7 +21,7 @@ const SignInForm = () => {
     }
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        dispatch(emailSignInStart(email, password));
+        dispatch(emailSignInStart({email, password}));
         setFormFields(defaultFormFields);
     }
     return (
