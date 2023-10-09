@@ -1,7 +1,7 @@
 import './checkout-item.styles.scss';
 import { addItemToCart,removeItemFromCart,clearItemFromCart } from "../../store/cart/cart.reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems, selectCartQuantity } from "../../store/cart/cart.selector";
+import { selectCartItems } from "../../store/cart/cart.selector";
 const CheckoutItem = ({ cartItem }) => {
     const {name,imageUrl,price,quantity} = cartItem;
     const dispatch = useDispatch();

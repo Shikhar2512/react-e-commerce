@@ -14,7 +14,7 @@ const App = () => {
   const isLoading = useSelector(selectAuthIsLoading)
   useEffect(() => {
     dispatch(checkCurrentUser());
-  }, [])
+  }, [dispatch])
   if (isLoading) {
     return (
       <Spinner />

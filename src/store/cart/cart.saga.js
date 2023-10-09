@@ -14,7 +14,7 @@ import { addItemToCart, clearItemFromCart, removeItemFromCart, setIsCartOpen } f
 //     state.isCartOpen = !state.isCartOpen;
 //   } 
 function* onSetIsCartOpen(){
-    yield put(setIsCartOpen);
+    yield put(setIsCartOpen());
     // yield takeLatest('cart/setIsCartOpen',call(setIsCartOpen))
 }
 function* onClearItemFromCart(){
@@ -27,5 +27,5 @@ function* onAddItemToCart(){
     yield takeLatest('cart/addItemToCart',call(addItemToCart))
 }
 export function* cartSaga (){
-    yield all[call(onAddItemToCart),call(onClearItemFromCart),call(onRemoveItemFromCart),call(onSetIsCartOpen)];
+    yield all[call(onAddItemToCart),call(onClearItemFromCart),call(onRemoveItemFromCart),call(onSetIsCartOpen)]
 }

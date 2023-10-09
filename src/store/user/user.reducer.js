@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const INITIAL_STATE = {
     currentUser: null,
-    isLoading: null,
+    isLoading: false,
     error: null
 }
 
@@ -11,7 +11,7 @@ const userSLice = createSlice(
         initialState: INITIAL_STATE,
         reducers: {
             resetFields(state,action){
-                state = INITIAL_STATE;
+                state.isLoading = false;
             },
             checkCurrentUser(state, action) { 
                 state.isLoading = true;

@@ -10,4 +10,5 @@ export const CategoryTitle = styled.h2`
     font-size: 35px;
     font-size: 900;
     margin-bottom: 25px;
+    margin-top: 80px;
 `
